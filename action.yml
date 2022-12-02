@@ -63,7 +63,7 @@ tabs:
     STANDALONE_TOKEN:
       type: TEXT
       name: Buddy On-Premises worker token
-docker_image_name: ubuntu
+docker_image_name: hashicorp/terraform
 docker_image_tag: latest
 entrypoint: /bin/sh
 output:
