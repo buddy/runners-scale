@@ -63,9 +63,7 @@ elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
 fi
 echo "New \$WORKERS: $WORKERS"
 
-printenv
-
-if [ -z "$AWS_ACCESS_KEY" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
+if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 0
 fi
 
