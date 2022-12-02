@@ -84,6 +84,8 @@ export TF_VAR_INSTANCE_VOLUME_IOPS=$INSTANCE_VOLUME_IOPS
 export TF_VAR_INSTANCE_PUBLIC_KEY=$INSTANCE_PUBLIC_KEY
 echo "$INSTANCE_PRIVATE_KEY" > key.pem
 
+ls -la
+
 cp install.tmpl.sh install.sh
 sed -i "s/STANDALONE_TOKEN/$STANDALONE_TOKEN/g" install.sh
 sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
@@ -91,6 +93,8 @@ sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
 terraform init -migrate-state -upgrade -input=false
+ls -la .state
+ls -la .terraform
 terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
