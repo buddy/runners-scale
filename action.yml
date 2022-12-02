@@ -1,4 +1,4 @@
-name: Scale_Workers
+name: Workers_Scale
 tabs:
   Scale:
     WORKER_TAG:
@@ -65,3 +65,6 @@ docker_image_tag: 'latest'
 execute_commands:
   - ls
   - pwd
+  - >
+    ls -la
+    pwd
