@@ -1,0 +1,70 @@
+name: Scale_Workers
+tabs:
+  Scale:
+    WORKER_TAG:
+      type: TEXT
+      name: Worker tag
+      info: Leave empty for no tag
+    WORKER_SLOTS:
+      type: TEXT
+      name: Number of concurrent slots per worker
+    MAX_SLOTS:
+      type: TEXT
+      name: Number of maximum concurrent slots for all workers
+    MIN_FREE_SLOTS:
+      type: TEXT
+      name: Minimum number of free concurrent slots
+  Aws:
+    AWS:
+      type: AWS_INTEGRATION
+      name: AWS integration
+      info: Leave empty if you dont want to automatically scale workers on aws
+    AWS_REGION:
+      type: TEXT
+      name: AWS region
+      default: "us-east"
+    AWS_AZ:
+      type: TEXT
+      name: AWS availability zone
+      default: "us-east-1"
+    INSTANCE_PRIVATE_KEY:
+      type: TEXTAREA
+      name: Private ssh key to connect to worker instance
+    INSTANCE_PUBLIC_KEY:
+      type: TEXTAREA
+      name: Public ssh key to connect to worker instance
+      info: ssh-rsa
+    INSTANCE_TYPE:
+      type: TEXT
+      name: Instance type
+      default: "t3.medium"
+    INSTANCE_AMI_ID:
+      type: TEXT
+      name: Instance machine image (ami)
+      default: "ami-08c40ec9ead489470"
+    INSTANCE_VOLUME_SIZE:
+      type: TEXT
+      name: Instance disk size (GB)
+      default: "50"
+    INSTANCE_VOLUME_THROUGHPUT:
+      type: TEXT
+      name: Instance disk speed (MB/s)
+      default: "125"
+    INSTANCE_VOLUME_IOPS:
+      type: TEXT
+      name: Instance disk iops
+      default: "3000"
+    STANDALONE_HOST:
+      type: TEXT
+      name: Buddy On-Premises Primary instance address
+    STANDALONE_TOKEN:
+      type: TEXT
+      name: Buddy On-Premises worker token
+docker_image_name: 'hashicorp/terraform'
+docker_image_tag: 'latest'
+execute_commands:
+  - ls
+  - pwd
+  - >
+    ls -la
+    pwd
