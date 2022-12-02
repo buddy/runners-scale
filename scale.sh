@@ -67,6 +67,10 @@ if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 0
 fi
 
+
+pwd
+ls -la
+
 ls -la /buddy/.state
 ls -la /buddy/.terraform
 
