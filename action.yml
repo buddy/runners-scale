@@ -69,6 +69,7 @@ docker_image_name: buddy/workers-scale
 docker_image_tag: latest
 cached_dirs:
   - /buddy/.terraform
+  - /buddy/.state
 output:
   variables:
     WORKERS:

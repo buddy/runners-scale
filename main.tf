@@ -5,6 +5,9 @@ terraform {
       version = "4.40.0"
     }
   }
+  backend "local" {
+    path = ".state"
+  }
 }
 
 provider "aws" {
