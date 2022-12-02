@@ -67,6 +67,13 @@ if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 0
 fi
 
+ls -la /buddy/.state
+ls -la /buddy/.terraform
+
+touch /buddy/.state/statefile
+touch /buddy/.terraform/tffile
+
+
 export TF_VAR_AWS_REGION=$AWS_REGION
 export TF_VAR_AWS_AZ=$AWS_AZ
 export TF_VAR_WORKERS=$WORKERS
