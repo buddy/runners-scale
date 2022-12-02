@@ -63,6 +63,7 @@ elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
 fi
 echo "New \$WORKERS: $WORKERS"
 
+pwd
 ls -la
 ls -la .state
 ls -la .terraform
