@@ -63,17 +63,10 @@ tabs:
     STANDALONE_TOKEN:
       type: TEXT
       name: Buddy On-Premises worker token
-docker_image_name: hashicorp/terraform
+docker_image_name: buddy/workers-scale
 docker_image_tag: latest
-reset_entrypoint: true
 output:
   variables:
     WORKERS:
       example: "2"
       info: Number of workers
-execute_commands:
-  - ls
-  - pwd
-  - >
-    ls -la
-    pwd
