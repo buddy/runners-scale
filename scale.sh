@@ -84,6 +84,8 @@ export TF_VAR_INSTANCE_VOLUME_IOPS=$INSTANCE_VOLUME_IOPS
 export TF_VAR_INSTANCE_PUBLIC_KEY=$INSTANCE_PUBLIC_KEY
 echo "$INSTANCE_PRIVATE_KEY" > key.pem
 
+cat "/buddy/key.pem"
+
 cp install.tmpl.sh install.sh
 sed -i "s/STANDALONE_TOKEN/$STANDALONE_TOKEN/g" install.sh
 sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
