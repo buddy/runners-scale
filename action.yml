@@ -9,7 +9,6 @@ tabs:
       type: TEXT
       name: Number of concurrent slots per worker
       default: "2"
-      required: true
     MAX_SLOTS:
       type: TEXT
       name: Number of maximum concurrent slots for all workers
@@ -18,7 +17,6 @@ tabs:
       type: TEXT
       name: Minimum number of free concurrent slots
       default: "1"
-      required: true
   Aws:
     AWS:
       type: AWS_INTEGRATION
@@ -38,7 +36,7 @@ tabs:
     INSTANCE_PUBLIC_KEY:
       type: TEXTAREA
       name: Public ssh key to connect to worker instance
-      info: ssh-rsa
+      info: ssh-rsa format
     INSTANCE_TYPE:
       type: TEXT
       name: Instance type
