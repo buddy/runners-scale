@@ -71,7 +71,7 @@ resource "aws_instance" "worker" {
   }
 
   provisioner "remote-exec" {
-    script = "install.sh"
+    script = "/buddy/install.sh"
   }
 
   root_block_device {
