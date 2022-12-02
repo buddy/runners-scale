@@ -69,7 +69,7 @@ entrypoint: /bin/sh
 output:
   variables:
     WORKERS:
-      example: 2
+      example: "2"
       info: Number of workers
 execute_commands:
   - ls
