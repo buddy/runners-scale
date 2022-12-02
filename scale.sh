@@ -63,10 +63,9 @@ elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
 fi
 echo "New \$WORKERS: $WORKERS"
 
-pwd
+echo "PWD: $(pwd)"
 ls -la
 ls -la .state
-ls -la .terraform
 
 if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 0
@@ -84,8 +83,6 @@ export TF_VAR_INSTANCE_VOLUME_IOPS=$INSTANCE_VOLUME_IOPS
 export TF_VAR_INSTANCE_PUBLIC_KEY=$INSTANCE_PUBLIC_KEY
 echo "$INSTANCE_PRIVATE_KEY" > key.pem
 
-ls -la
-
 cp install.tmpl.sh install.sh
 sed -i "s/STANDALONE_TOKEN/$STANDALONE_TOKEN/g" install.sh
 sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
@@ -93,8 +90,9 @@ sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
 terraform init -migrate-state -upgrade -input=false
+echo "PWD: $(pwd)"
+ls -la
 ls -la .state
-ls -la .terraform
 terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
