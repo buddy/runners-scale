@@ -59,7 +59,7 @@ resource "aws_instance" "worker" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("key.pem")
+    private_key = file("/buddy/key.pem")
     port        = 22
   }
 
