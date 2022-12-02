@@ -67,6 +67,8 @@ tabs:
       masked: true
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
+cached_dirs:
+  - /buddy
 output:
   variables:
     WORKERS:
