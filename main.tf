@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "local" {
-    path = ".state"
+    path = "/buddy/.state"
   }
 }
 
