@@ -65,7 +65,7 @@ tabs:
       name: Buddy On-Premises worker token
 docker_image_name: hashicorp/terraform
 docker_image_tag: latest
-entrypoint: /bin/sh
+reset_entrypoint: true
 output:
   variables:
     WORKERS:
