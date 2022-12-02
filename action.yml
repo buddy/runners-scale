@@ -33,6 +33,7 @@ tabs:
     INSTANCE_PRIVATE_KEY:
       type: TEXTAREA
       name: Private ssh key to connect to worker instance
+      masked: true
     INSTANCE_PUBLIC_KEY:
       type: TEXTAREA
       name: Public ssh key to connect to worker instance
@@ -63,6 +64,7 @@ tabs:
     STANDALONE_TOKEN:
       type: TEXT
       name: Buddy On-Premises worker token
+      masked: true
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
 output:
