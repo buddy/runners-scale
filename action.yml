@@ -68,7 +68,7 @@ tabs:
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
 volume_mappings:
-  .terraform:/buddy/.terraform
+  - .terraform:/buddy/.terraform
 output:
   variables:
     WORKERS:
