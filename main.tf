@@ -5,9 +5,6 @@ terraform {
       version = "4.40.0"
     }
   }
-  backend "local" {
-    workspace_dir = "/buddy/.state"
-  }
 }
 
 provider "aws" {
