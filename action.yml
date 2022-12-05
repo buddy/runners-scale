@@ -75,8 +75,6 @@ tabs:
       masked: true
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
-volume_mappings:
-  - .terraform:/buddy/.terraform
 working_directory: /buddy
 output:
   variables:
