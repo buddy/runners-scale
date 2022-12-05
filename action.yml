@@ -33,7 +33,6 @@ tabs:
     BACKEND_BUCKET:
       type: TEXT
       name: Bucket for Terraform state
-      default: buddy-workers
       info: Bucket must exist
     BACKEND_KEY:
       type: TEXT
