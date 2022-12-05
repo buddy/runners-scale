@@ -8,15 +8,6 @@ terraform {
   backend "s3" {}
 }
 
-data "terraform_remote_state" "state" {
-  backend = "s3"
-  config {
-    bucket     = var.BACKEND_BUCKET
-    region     = var.AWS_REGION
-    key        = var.BACKEND_KEY
-  }
-}
-
 provider "aws" {
   region = var.AWS_REGION
 }
