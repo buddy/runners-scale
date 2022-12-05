@@ -86,7 +86,7 @@ sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
 terraform init -migrate-state -upgrade -input=false
-#terraform apply -auto-approve -input=false
+terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
 
