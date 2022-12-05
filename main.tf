@@ -5,11 +5,7 @@ terraform {
       version = "4.40.0"
     }
   }
-  backend "s3" {
-    bucket = var.BACKEND_BUCKET
-    key = var.BACKEND_KEY
-    region = var.AWS_REGION
-  }
+  backend "s3" {}
 }
 
 provider "aws" {

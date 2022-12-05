@@ -77,8 +77,6 @@ export TF_VAR_INSTANCE_VOLUME_SIZE=$INSTANCE_VOLUME_SIZE
 export TF_VAR_INSTANCE_VOLUME_THROUGHPUT=$INSTANCE_VOLUME_THROUGHPUT
 export TF_VAR_INSTANCE_VOLUME_IOPS=$INSTANCE_VOLUME_IOPS
 export TF_VAR_INSTANCE_PUBLIC_KEY=$INSTANCE_PUBLIC_KEY
-export TF_VAR_BACKEND_BUCKET=$BACKEND_BUCKET
-export TF_VAR_BACKEND_KEY=$BACKEND_KEY
 echo "$INSTANCE_PRIVATE_KEY" > key.pem
 
 cp install.tmpl.sh install.sh
@@ -87,9 +85,7 @@ sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
 sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
-terraform init -migrate-state -upgrade -input=false
-terraform apply -auto-approve -input=false
-#terraform plan -input=false
-#terraform destroy -auto-approve -input=false
+terraform init -migrate-state -upgrade -input=false -backend-config="bucket=$BACKEND_BUCKET" -backend-config="key=$BACKEND_KEY" -backend-config="region=$AWS_AZ"
+terraform apply -auto-approve -input=false -backend-config="bucket=$BACKEND_BUCKET" -backend-config="key=$BACKEND_KEY" -backend-config="region=$AWS_AZ"
 
 rm key.pem
