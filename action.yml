@@ -30,6 +30,14 @@ tabs:
       type: TEXT
       name: AWS availability zone
       default: us-east-1
+    BACKEND_BUCKET:
+      type: TEXT
+      name: Bucket for Terraform state
+      default: workers
+    BACKEND_KEY:
+      type: TEXT
+      name: Path in bucket for terraform state
+      default: workers.tfstate
     INSTANCE_PRIVATE_KEY:
       type: TEXTAREA
       name: Private ssh key to connect to worker instance

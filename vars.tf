@@ -33,3 +33,11 @@ variable "INSTANCE_VOLUME_IOPS" {
 variable "INSTANCE_PUBLIC_KEY" {
   type = string
 }
+
+variable "BACKEND_BUCKET" {
+  type = string
+}
+
+variable "BACKEND_KEY" {
+  type = string
+}
