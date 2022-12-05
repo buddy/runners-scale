@@ -6,8 +6,7 @@ terraform {
     }
   }
   backend "local" {
-    workspace_dir = "/buddy/.terraform"
-    path = "workers.tfstate"
+    path = ".terraform/workers.tfstate"
   }
 }
 
