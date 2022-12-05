@@ -6,7 +6,8 @@ terraform {
     }
   }
   backend "local" {
-    workspace_dir = ".terraform"
+    workspace_dir = "/buddy/.terraform"
+    path = "workers.tfstate"
   }
 }
 
@@ -59,7 +60,7 @@ resource "aws_instance" "worker" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("key.pem")
+    private_key = file("/buddy/key.pem")
     port        = 22
   }
 
@@ -71,7 +72,7 @@ resource "aws_instance" "worker" {
   }
 
   provisioner "remote-exec" {
-    script = "install.sh"
+    script = "/buddy/install.sh"
   }
 
   root_block_device {
