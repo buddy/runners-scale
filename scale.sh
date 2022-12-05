@@ -97,7 +97,7 @@ echo ".terraform: "
 ls -la .terraform
 touch .terraform/test
 
-terraform apply -auto-approve -input=false
+#terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
 
