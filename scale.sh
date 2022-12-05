@@ -63,10 +63,6 @@ elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
 fi
 echo "New \$WORKERS: $WORKERS"
 
-echo "PWD: $(pwd)"
-ls -la
-ls -la .state
-
 if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
   exit 0
 fi
@@ -92,7 +88,11 @@ sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 terraform init -migrate-state -upgrade -input=false
 echo "PWD: $(pwd)"
 ls -la
+echo ".state: "
 ls -la .state
+echo ".terraform: "
+ls -la .terraform
+
 terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
