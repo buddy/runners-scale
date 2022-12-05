@@ -5,7 +5,9 @@ terraform {
       version = "4.40.0"
     }
   }
-  backend "s3" {}
+  backend "s3" {
+    profile = "default"
+  }
 }
 
 provider "aws" {
