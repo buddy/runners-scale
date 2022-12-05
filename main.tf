@@ -5,6 +5,9 @@ terraform {
       version = "4.40.0"
     }
   }
+  backend "local" {
+    path = ".terraform/terraform.tfstate"
+  }
 }
 
 provider "aws" {
@@ -56,7 +59,7 @@ resource "aws_instance" "worker" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("/buddy/key.pem")
+    private_key = file("key.pem")
     port        = 22
   }
 
@@ -68,7 +71,7 @@ resource "aws_instance" "worker" {
   }
 
   provisioner "remote-exec" {
-    script = "/buddy/install.sh"
+    script = "install.sh"
   }
 
   root_block_device {
