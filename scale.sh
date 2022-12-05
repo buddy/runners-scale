@@ -97,6 +97,6 @@ sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
 terraform init -migrate-state -upgrade -input=false -backend-config="bucket=$BACKEND_BUCKET" -backend-config="key=$BACKEND_KEY" -backend-config="region=$AWS_REGION"
-terraform apply -auto-approve -input=false -backend-config="bucket=$BACKEND_BUCKET" -backend-config="key=$BACKEND_KEY" -backend-config="region=$AWS_REGION"
+terraform apply -auto-approve -input=false
 
 rm key.pem
