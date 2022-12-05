@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "local" {
-    path = ".terraform/terraform.tfstate"
+    workspace_dir = ".terraform"
   }
 }
 
