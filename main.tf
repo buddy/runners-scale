@@ -5,8 +5,15 @@ terraform {
       version = "4.40.0"
     }
   }
-  backend "s3" {
-    profile = "default"
+  backend "s3" {}
+}
+
+data "terraform_remote_state" "state" {
+  backend = "s3"
+  config {
+    bucket     = var.BACKEND_BUCKET
+    region     = var.AWS_REGION
+    key        = var.BACKEND_KEY
   }
 }
 
