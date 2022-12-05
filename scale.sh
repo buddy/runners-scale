@@ -85,18 +85,7 @@ sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
 sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
 sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
 
-echo "PWD: $(pwd)"
-ls -la
-echo ".terraform: "
-ls -la .terraform || true
-
 terraform init -migrate-state -upgrade -input=false
-echo "PWD: $(pwd)"
-ls -la
-echo ".terraform: "
-ls -la .terraform
-touch .terraform/test
-
 #terraform apply -auto-approve -input=false
 #terraform plan -input=false
 #terraform destroy -auto-approve -input=false
