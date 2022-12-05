@@ -45,7 +45,7 @@ tabs:
     INSTANCE_AMI_ID:
       type: TEXT
       name: Instance machine image (ami)
-      default: ami-08c40ec9ead489470
+      default: ami-06ce824c157700cd2
     INSTANCE_VOLUME_SIZE:
       type: TEXT
       name: Instance disk size (GB)
