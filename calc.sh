@@ -63,4 +63,4 @@ elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
   export WORKERS=$((WORKERS - 1))
 fi
 echo "New \$WORKERS: $WORKERS"
-export $WORKERS="$WORKERS"
+export WORKERS="$WORKERS"
