@@ -19,6 +19,8 @@ inputs:
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
 working_directory: /buddy
+execute_commands:
+  - ./calc.sh
 output:
   variables:
     WORKERS:
