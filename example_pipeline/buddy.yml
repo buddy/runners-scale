@@ -44,7 +44,7 @@
         - key: BACKEND_BUCKET
           value: "[BUCKET ON S3 TO SAVE TERRAFORM STATE]"
         - key: BACKEND_KEY
-          value: "[PATH IN BUCKET TO SAVE TERRAFORM STATE]"
+          value: "workers.tfstate"
       execute_commands:
         - chmod +x scale.sh
         - ./scale.sh
