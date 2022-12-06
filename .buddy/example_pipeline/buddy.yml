@@ -1,0 +1,48 @@
+- pipeline: Scale Workers
+  on: SCHEDULE
+  delay: 5
+  tags:
+    - manage
+  actions:
+    - action: Calculate Workers
+      type: CUSTOM
+      custom_type: Workers_Scale:latest
+      inputs:
+        WORKER_TAG: ""
+        WORKER_SLOTS: "2"
+        MAX_SLOTS: "3"
+        MIN_FREE_SLOTS: "1"
+    - action: Scale Workers
+      type: TERRAFORM
+      version: latest
+      variables:
+        - key: AWS_REGION
+          value: "eu-central-1"
+        - key: AWS_AZ
+          value: "eu-central-1c"
+        - key: INSTANCE_PRIVATE_KEY
+          value: "[PRIVATE KEY TO CONNECT TO WORKER]"
+        - key: INSTANCE_PUBLIC_KEY
+          value: "[PUBLIC KEY TO CONNECT TO WORKER]"
+        - key: INSTANCE_TYPE
+          value: "t3.medium"
+        - key: INSTANCE_AMI_ID
+          value: "ami-06ce824c157700cd2"
+        - key: INSTANCE_VOLUME_SIZE
+          value: "50"
+        - key: INSTANCE_VOLUME_THROUGHPUT
+          value: "125"
+        - key: INSTANCE_VOLUME_IOPS
+          value: "3000"
+        - key: STANDALONE_HOST
+          value: "172.31.15.212"
+        - key: STANDALONE_TOKEN
+          value: "[ON-PREMISES WORKER TOKEN]"
+        - key: BACKEND_BUCKET
+          value: "[BUCKET ON S3 TO SAVE TERRAFORM STATE]"
+        - key: BACKEND_KEY
+          value: "[PATH IN BUCKET TO SAVE TERRAFORM STATE]"
+      execute_commands:
+        - chmod +x .buddy/example_pipeline/scale.sh
+        - ./.buddy/example_pipeline/scale.sh
+      integration_hash: "[AWS INTEGRATION HASH]"

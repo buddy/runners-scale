@@ -1,78 +1,21 @@
 name: Workers_Scale
-tabs:
-  Scale:
-    WORKER_TAG:
-      type: TEXT
-      name: Worker tag
-      info: Leave empty for no tag
-    WORKER_SLOTS:
-      type: TEXT
-      name: Number of concurrent slots per worker
-      default: "2"
-    MAX_SLOTS:
-      type: TEXT
-      name: Number of maximum concurrent slots for all workers
-      required: true
-    MIN_FREE_SLOTS:
-      type: TEXT
-      name: Minimum number of free concurrent slots
-      default: "1"
-  Aws:
-    AWS:
-      type: AWS_INTEGRATION
-      name: AWS integration
-      info: Leave empty if you dont want to automatically scale workers on aws
-    AWS_REGION:
-      type: TEXT
-      name: AWS region
-      default: us-east
-    AWS_AZ:
-      type: TEXT
-      name: AWS availability zone
-      default: us-east-1
-    BACKEND_BUCKET:
-      type: TEXT
-      name: Bucket for Terraform state
-      info: Bucket must exist
-    BACKEND_KEY:
-      type: TEXT
-      name: Path in bucket for terraform state
-      default: workers.tfstate
-    INSTANCE_PRIVATE_KEY:
-      type: TEXTAREA
-      name: Private ssh key to connect to worker instance
-      masked: true
-    INSTANCE_PUBLIC_KEY:
-      type: TEXTAREA
-      name: Public ssh key to connect to worker instance
-      info: ssh-rsa format
-    INSTANCE_TYPE:
-      type: TEXT
-      name: Instance type
-      default: t3.medium
-    INSTANCE_AMI_ID:
-      type: TEXT
-      name: Instance machine image (ami)
-      default: ami-06ce824c157700cd2
-    INSTANCE_VOLUME_SIZE:
-      type: TEXT
-      name: Instance disk size (GB)
-      default: "50"
-    INSTANCE_VOLUME_THROUGHPUT:
-      type: TEXT
-      name: Instance disk speed (MB/s)
-      default: "125"
-    INSTANCE_VOLUME_IOPS:
-      type: TEXT
-      name: Instance disk iops
-      default: "3000"
-    STANDALONE_HOST:
-      type: TEXT
-      name: Buddy On-Premises Primary instance address
-    STANDALONE_TOKEN:
-      type: TEXT
-      name: Buddy On-Premises worker token
-      masked: true
+inputs:
+  WORKER_TAG:
+    type: TEXT
+    name: Worker tag
+    info: Leave empty for no tag
+  WORKER_SLOTS:
+    type: TEXT
+    name: Number of concurrent slots per worker
+    default: "2"
+  MAX_SLOTS:
+    type: TEXT
+    name: Number of maximum concurrent slots for all workers
+    required: true
+  MIN_FREE_SLOTS:
+    type: TEXT
+    name: Minimum number of free concurrent slots
+    default: "1"
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest
 working_directory: /buddy
@@ -81,3 +24,7 @@ output:
     WORKERS:
       example: "2"
       info: Number of workers
+    WORKER_SLOTS:
+      example: "4"
+    WORKER_TAG:
+      example: "TAG"

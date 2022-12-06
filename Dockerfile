@@ -1,5 +1,5 @@
-FROM hashicorp/terraform:latest
-ENTRYPOINT ["/buddy/scale.sh"]
+FROM ubuntu:22.04
 WORKDIR /buddy
 ADD . /buddy
-RUN chmod +x /buddy/scale.sh && mkdir /buddy/.state
+RUN chmod +x /buddy/calc.sh
+CMD ["/buddy/calc.sh"]
