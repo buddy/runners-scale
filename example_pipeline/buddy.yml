@@ -1,8 +1,11 @@
 - pipeline: Scale Workers
   on: SCHEDULE
   delay: 5
+  start_date: "2022-01-01T00:00:00Z"
   tags:
     - manage
+  refs:
+    - "refs/heads/main"
   actions:
     - action: Calculate Workers
       type: CUSTOM
@@ -43,6 +46,6 @@
         - key: BACKEND_KEY
           value: "[PATH IN BUCKET TO SAVE TERRAFORM STATE]"
       execute_commands:
-        - chmod +x .buddy/example_pipeline/scale.sh
-        - ./.buddy/example_pipeline/scale.sh
+        - chmod +x scale.sh
+        - ./scale.sh
       integration_hash: "[AWS INTEGRATION HASH]"
