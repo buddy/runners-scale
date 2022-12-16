@@ -6,8 +6,7 @@ set +x
 # env validation
 [ -n "$MAX_SLOTS" ] && [ "$MAX_SLOTS" -eq "$MAX_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
-  echo "Env \$MAX_SLOTS ($MAX_SLOTS) is not a number"
-  exit 1
+  MAX_SLOTS=$((BUDDY_WORKERS_CONCURRENT_SLOTS - 1))
 fi
 if [ "$MAX_SLOTS" -le 0 ]; then
   echo "Env \$MAX_SLOTS ($MAX_SLOTS) must be greater than 0"

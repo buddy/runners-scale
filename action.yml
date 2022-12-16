@@ -11,7 +11,7 @@ inputs:
   MAX_SLOTS:
     type: TEXT
     name: Number of maximum concurrent slots for all workers
-    default: "$BUDDY_WORKERS_CONCURRENT_SLOTS"
+    info: Leave empty to use concurrent slots from license - 1
   MIN_FREE_SLOTS:
     type: TEXT
     name: Minimum number of free concurrent slots
