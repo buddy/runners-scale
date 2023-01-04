@@ -1,18 +1,18 @@
 name: Workers_Scale
 inputs:
-  WORKER_TAG2:
+  WORKER_TAG:
     type: TEXT
     name: Worker tag
     info: Leave empty for no tag
-  WORKER_SLOTS2:
+  WORKER_SLOTS:
     type: TEXT
     name: Number of concurrent slots per worker
     default: "2"
-  MAX_WORKERS2:
+  MAX_WORKERS:
     type: TEXT
     name: Number of maximum workers
     info: Leave empty to calculate value from concurrent slots in license
-  MIN_FREE_SLOTS2:
+  MIN_FREE_SLOTS:
     type: TEXT
     name: Minimum number of free concurrent slots
     default: "1"
