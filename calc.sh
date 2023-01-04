@@ -22,7 +22,7 @@ if [ "$MAX_WORKERS" -le 0 ]; then
   exit 1
 fi
 MAX_SLOTS=$((MAX_WORKERS * WORKER_SLOTS))
-if [ "$MAX_SLOTS" -ge "$BUDDY_WORKERS_CONCURRENT_SLOTS" ]; then
+if [ "$MAX_SLOTS" -gt "$BUDDY_WORKERS_CONCURRENT_SLOTS" ]; then
   echo "Env \$MAX_WORKERS ($MAX_WORKERS) is too large (cannot add $MAX_WORKERS workers with $WORKER_SLOTS slots each than concurrent slots from license - $BUDDY_WORKERS_CONCURRENT_SLOTS)"
   exit 1
 fi
