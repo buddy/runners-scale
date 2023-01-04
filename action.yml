@@ -8,10 +8,10 @@ inputs:
     type: TEXT
     name: Number of concurrent slots per worker
     default: "2"
-  MAX_SLOTS:
+  MAX_WORKERS:
     type: TEXT
-    name: Number of maximum concurrent slots for all workers
-    info: Leave empty to use concurrent slots from license - 1
+    name: Number of maximum workers
+    info: Leave empty to calculate value from concurrent slots in license
   MIN_FREE_SLOTS:
     type: TEXT
     name: Minimum number of free concurrent slots

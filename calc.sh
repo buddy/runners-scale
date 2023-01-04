@@ -4,14 +4,6 @@ set -e
 set +x
 
 # env validation
-[ -n "$MAX_SLOTS" ] && [ "$MAX_SLOTS" -eq "$MAX_SLOTS" ] 2>/dev/null
-if [ $? -ne 0 ]; then
-  MAX_SLOTS=$((BUDDY_WORKERS_CONCURRENT_SLOTS - 1))
-fi
-if [ "$MAX_SLOTS" -le 0 ]; then
-  echo "Env \$MAX_SLOTS ($MAX_SLOTS) must be greater than 0"
-  exit 1
-fi
 [ -n "$WORKER_SLOTS" ] && [ "$WORKER_SLOTS" -eq "$WORKER_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
   echo "Env \$WORKER_SLOTS ($WORKER_SLOTS) is not a number"
@@ -21,6 +13,20 @@ if [ "$WORKER_SLOTS" -le 0 ]; then
   echo "Env \$WORKER_SLOTS ($WORKER_SLOTS) must be greater than 0"
   exit 1
 fi
+[ -n "$MAX_WORKERS" ] && [ "$MAX_WORKERS" -eq "$MAX_WORKERS" ] 2 >/dev/null
+if [ $? -ne 0 ]; then
+  MAX_WORKERS=$((((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) / WORKER_SLOTS) + (((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) % WORKER_SLOTS) > 0)))
+fi
+if [ "$MAX_WORKERS" -le 0 ]; then
+  echo "Env \$MAX_WORKERS ($MAX_WORKERS) must be greater than 0"
+  exit 1
+fi
+MAX_SLOTS=$((MAX_WORKERS * WORKER_SLOTS))
+if [ "$MAX_SLOTS" -ge "$BUDDY_WORKERS_CONCURRENT_SLOTS" ]; then
+  echo "Env \$MAX_WORKERS ($MAX_WORKERS) is too large (cannot add $MAX_WORKERS workers with $WORKER_SLOTS slots each than concurrent slots from license - $BUDDY_WORKERS_CONCURRENT_SLOTS)"
+  exit 1
+fi
+
 [ -n "$MIN_FREE_SLOTS" ] && [ "$MIN_FREE_SLOTS" -eq "$MIN_FREE_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
    echo "Env \$MIN_FREE_SLOTS ($MIN_FREE_SLOTS) is not a number"
@@ -49,10 +55,11 @@ if [ $? -ne 0 ]; then
    echo "Env \$WORKERS ($WORKERS) is not a number. \$WORKER_TAG ($WORKER_TAG) has wrong value"
    exit 1
 fi
-echo "\$MAX_SLOTS: $MAX_SLOTS"
-echo "\$FREE_SLOTS: $FREE_SLOTS"
+echo "\$MAX_WORKERS: $MAX_WORKERS"
 echo "\$WORKER_SLOTS: $WORKER_SLOTS"
+echo "\$MAX_SLOTS: $MAX_SLOTS"
 echo "\$MIN_FREE_SLOTS: $MIN_FREE_SLOTS"
+echo "\$FREE_SLOTS: $FREE_SLOTS"
 echo "\$WORKERS: $WORKERS"
 REAL_WORKER_SLOTS=$((WORKERS * WORKER_SLOTS))
 REAL_FREE_SLOTS=$((FREE_SLOTS - MIN_FREE_SLOTS))

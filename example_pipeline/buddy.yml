@@ -13,7 +13,7 @@
       inputs:
         WORKER_TAG: ""
         WORKER_SLOTS: "2"
-        MAX_SLOTS: "3"
+        MAX_WORKERS: "2"
         MIN_FREE_SLOTS: "1"
     - action: Scale Workers
       type: TERRAFORM
