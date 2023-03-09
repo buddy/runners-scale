@@ -17,7 +17,7 @@ if [ "$WORKER_SLOTS" -le 0 ]; then
   echo "Env \$WORKER_SLOTS ($WORKER_SLOTS) must be greater than 0"
   exit 1
 fi
-[ -n "$MAX_WORKERS" ] && [ "$MAX_WORKERS" -eq "$MAX_WORKERS" ] 2 >/dev/null
+[ -n "$MAX_WORKERS" ] && [ "$MAX_WORKERS" -eq "$MAX_WORKERS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
   MAX_WORKERS=$((((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) / WORKER_SLOTS) + (((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) % WORKER_SLOTS) > 0)))
 fi
