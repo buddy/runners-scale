@@ -3,6 +3,10 @@
 set -e
 set +x
 
+echo "\$WORKER_SLOTS: $WORKER_SLOTS"
+echo "\$MAX_WORKERS: $MAX_WORKERS"
+echo "\$MIN_FREE_SLOTS: $MIN_FREE_SLOTS"
+
 # env validation
 [ -n "$WORKER_SLOTS" ] && [ "$WORKER_SLOTS" -eq "$WORKER_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
@@ -56,10 +60,7 @@ if [ $? -ne 0 ]; then
    exit 1
 fi
 USED_SLOTS=$((WORKERS * WORKER_SLOTS))
-echo "\$MAX_WORKERS: $MAX_WORKERS"
-echo "\$WORKER_SLOTS: $WORKER_SLOTS"
 echo "\$MAX_SLOTS: $MAX_SLOTS"
-echo "\$MIN_FREE_SLOTS: $MIN_FREE_SLOTS"
 echo "\$FREE_SLOTS: $FREE_SLOTS"
 echo "\$USED_SLOTS: $USED_SLOTS"
 echo "\$WORKERS: $WORKERS"
