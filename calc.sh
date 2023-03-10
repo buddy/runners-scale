@@ -41,7 +41,7 @@ if [ "$MIN_FREE_SLOTS" -lt 1 ]; then
   exit 1
 fi
 if [ -n "$WORKER_TAG" ]; then
-  tmp="BUDDY_WORKERS_FREESLOTS_$WORKER_TAG"
+  tmp="BUDDY_WORKERS_FREE_SLOTS_$WORKER_TAG"
   FREE_SLOTS=${!tmp}
   tmp="BUDDY_WORKERS_COUNT_$WORKER_TAG"
   WORKERS=${!tmp}
