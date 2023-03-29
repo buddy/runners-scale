@@ -3,18 +3,18 @@ inputs:
   WORKER_TAG:
     type: TEXT
     name: Worker tag
-    info: Leave empty for no tag
+    info: Leave empty for untagged workers
   WORKER_SLOTS:
     type: TEXT
-    name: Number of concurrent slots per worker
+    name: Number of slots per worker
     default: "2"
+    info: Leave empty to calculate value from license
   MAX_WORKERS:
     type: TEXT
-    name: Number of maximum workers
-    info: Leave empty to calculate value from concurrent slots in license
+    name: Maximum number of workers
   MIN_FREE_SLOTS:
     type: TEXT
-    name: Minimum number of free concurrent slots
+    name: Minimum number of free slots
     default: "1"
 docker_image_name: buddy/workers-scale
 docker_image_tag: latest

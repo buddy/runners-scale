@@ -5,7 +5,7 @@
   tags:
     - manage
   refs:
-    - "refs/heads/main"
+    - ":default"
   actions:
     - action: Calculate Workers
       type: CUSTOM
