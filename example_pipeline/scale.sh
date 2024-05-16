@@ -11,13 +11,13 @@ echo "\$INSTANCE_TYPE: $INSTANCE_TYPE"
 echo "\$INSTANCE_VOLUME_SIZE: $INSTANCE_VOLUME_SIZE"
 echo "\$INSTANCE_VOLUME_THROUGHPUT: $INSTANCE_VOLUME_THROUGHPUT"
 echo "\$INSTANCE_VOLUME_IOPS: $INSTANCE_VOLUME_IOPS"
-echo "\$WORKERS: $WORKERS"
-echo "\$WORKER_SLOTS: $WORKER_SLOTS"
-echo "\$WORKER_TAG: $WORKER_TAG"
+echo "\$RUNNERS: $RUNNERS"
+echo "\$RUNNER_SLOTS: $RUNNER_SLOTS"
+echo "\$RUNNER_TAG: $RUNNER_TAG"
 
 export TF_VAR_AWS_REGION=$AWS_REGION
 export TF_VAR_AWS_AZ=$AWS_AZ
-export TF_VAR_WORKERS=$WORKERS
+export TF_VAR_RUNNERS=$RUNNERS
 export TF_VAR_INSTANCE_AMI_ID=$INSTANCE_AMI_ID
 export TF_VAR_INSTANCE_TYPE=$INSTANCE_TYPE
 export TF_VAR_INSTANCE_VOLUME_SIZE=$INSTANCE_VOLUME_SIZE
@@ -31,8 +31,8 @@ echo "$INSTANCE_PRIVATE_KEY" > key.pem
 cp install.tmpl.sh install.sh
 sed -i "s/STANDALONE_TOKEN/$STANDALONE_TOKEN/g" install.sh
 sed -i "s/STANDALONE_HOST/$STANDALONE_HOST/g" install.sh
-sed -i "s/WORKER_TAG/$WORKER_TAG/g" install.sh
-sed -i "s/WORKER_SLOTS/$WORKER_SLOTS/g" install.sh
+sed -i "s/RUNNER_TAG/$RUNNER_TAG/g" install.sh
+sed -i "s/RUNNER_SLOTS/$RUNNER_SLOTS/g" install.sh
 
 terraform init -migrate-state -upgrade -input=false -backend-config="bucket=$BACKEND_BUCKET" -backend-config="key=$BACKEND_KEY" -backend-config="region=$AWS_REGION"
 terraform apply -auto-approve -input=false

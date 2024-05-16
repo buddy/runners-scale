@@ -13,4 +13,4 @@ echo \
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 curl -sSL https://get.buddy.works | sudo sh
-sudo buddy --yes install-worker --token="STANDALONE_TOKEN" --standalone-host="https://STANDALONE_HOST" --tag="WORKER_TAG" --concurrent="WORKER_SLOTS"
+sudo buddy --yes install-worker --token="STANDALONE_TOKEN" --standalone-host="https://STANDALONE_HOST" --tag="RUNNER_TAG" --concurrent="RUNNER_SLOTS"
