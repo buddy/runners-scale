@@ -12,14 +12,14 @@ provider "aws" {
   region = var.AWS_REGION
 }
 
-resource "aws_key_pair" "worker" {
-  key_name   = "worker-key"
+resource "aws_key_pair" "runner" {
+  key_name   = "runner-key"
   public_key = var.INSTANCE_PUBLIC_KEY
 }
 
-resource "aws_security_group" "worker" {
-  name        = "worker"
-  description = "security group for workers"
+resource "aws_security_group" "runner" {
+  name        = "runner"
+  description = "security group for runners"
   ingress {
     from_port   = 0
     protocol    = "-1"
@@ -45,13 +45,13 @@ resource "aws_security_group" "worker" {
   }
 }
 
-resource "aws_instance" "worker" {
-  count                  = var.WORKERS
+resource "aws_instance" "runner" {
+  count                  = var.RUNNERS
   ami                    = var.INSTANCE_AMI_ID
   instance_type          = var.INSTANCE_TYPE
-  key_name               = aws_key_pair.worker.key_name
+  key_name               = aws_key_pair.runner.key_name
   availability_zone      = var.AWS_AZ
-  vpc_security_group_ids = [aws_security_group.worker.id]
+  vpc_security_group_ids = [aws_security_group.runner.id]
 
   connection {
     type        = "ssh"
@@ -81,6 +81,6 @@ resource "aws_instance" "worker" {
   }
 
   tags = {
-    Name = "Worker"
+    Name = "Runner"
   }
 }

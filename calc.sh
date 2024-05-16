@@ -3,31 +3,31 @@
 set -e
 set +x
 
-echo "\$WORKER_SLOTS: $WORKER_SLOTS"
-echo "\$MAX_WORKERS: $MAX_WORKERS"
+echo "\$RUNNER_SLOTS: $RUNNER_SLOTS"
+echo "\$MAX_RUNNERS: $MAX_RUNNERS"
 echo "\$MIN_FREE_SLOTS: $MIN_FREE_SLOTS"
 
 # env validation
-[ -n "$WORKER_SLOTS" ] && [ "$WORKER_SLOTS" -eq "$WORKER_SLOTS" ] 2>/dev/null
+[ -n "$RUNNER_SLOTS" ] && [ "$RUNNER_SLOTS" -eq "$RUNNER_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
-  echo "Env \$WORKER_SLOTS ($WORKER_SLOTS) is not a number"
+  echo "Env \$RUNNER_SLOTS ($RUNNER_SLOTS) is not a number"
   exit 1
 fi
-if [ "$WORKER_SLOTS" -le 0 ]; then
-  echo "Env \$WORKER_SLOTS ($WORKER_SLOTS) must be greater than 0"
+if [ "$RUNNER_SLOTS" -le 0 ]; then
+  echo "Env \$RUNNER_SLOTS ($RUNNER_SLOTS) must be greater than 0"
   exit 1
 fi
-[ -n "$MAX_WORKERS" ] && [ "$MAX_WORKERS" -eq "$MAX_WORKERS" ] 2>/dev/null
+[ -n "$MAX_RUNNERS" ] && [ "$MAX_RUNNERS" -eq "$MAX_RUNNERS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
-  MAX_WORKERS=$((((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) / WORKER_SLOTS) + (((BUDDY_WORKERS_CONCURRENT_SLOTS - 1) % WORKER_SLOTS) > 0)))
+  MAX_RUNNERS=$((((BUDDY_RUNNERS_CONCURRENT_SLOTS - 1) / RUNNER_SLOTS) + (((BUDDY_RUNNERS_CONCURRENT_SLOTS - 1) % RUNNER_SLOTS) > 0)))
 fi
-if [ "$MAX_WORKERS" -le 0 ]; then
-  echo "Env \$MAX_WORKERS ($MAX_WORKERS) must be greater than 0"
+if [ "$MAX_RUNNERS" -le 0 ]; then
+  echo "Env \$MAX_RUNNERS ($MAX_RUNNERS) must be greater than 0"
   exit 1
 fi
-MAX_SLOTS=$((MAX_WORKERS * WORKER_SLOTS))
-if [ "$MAX_SLOTS" -gt "$BUDDY_WORKERS_CONCURRENT_SLOTS" ]; then
-  echo "Env \$MAX_WORKERS ($MAX_WORKERS) is too large (cannot add $MAX_WORKERS workers with $WORKER_SLOTS slots each than concurrent slots from license - $BUDDY_WORKERS_CONCURRENT_SLOTS)"
+MAX_SLOTS=$((MAX_RUNNERS * RUNNER_SLOTS))
+if [ "$MAX_SLOTS" -gt "$BUDDY_RUNNERS_CONCURRENT_SLOTS" ]; then
+  echo "Env \$MAX_RUNNERS ($MAX_RUNNERS) is too large (cannot add $MAX_RUNNERS runners with $RUNNER_SLOTS slots each than concurrent slots from license - $BUDDY_RUNNERS_CONCURRENT_SLOTS)"
   exit 1
 fi
 
@@ -40,36 +40,36 @@ if [ "$MIN_FREE_SLOTS" -lt 1 ]; then
   echo "Env \$MIN_FREE_SLOTS ($MIN_FREE_SLOTS) must be greater or equal 1"
   exit 1
 fi
-if [ -n "$WORKER_TAG" ]; then
-  tmp="BUDDY_WORKERS_FREE_SLOTS_${WORKER_TAG^^}"
+if [ -n "$RUNNER_TAG" ]; then
+  tmp="BUDDY_RUNNERS_FREE_SLOTS_${RUNNER_TAG^^}"
   FREE_SLOTS=${!tmp}
-  tmp="BUDDY_WORKERS_COUNT_${WORKER_TAG^^}"
-  WORKERS=${!tmp}
+  tmp="BUDDY_RUNNERS_COUNT_${RUNNER_TAG^^}"
+  RUNNERS=${!tmp}
 else
-  FREE_SLOTS=$BUDDY_WORKERS_FREE_SLOTS_NOT_TAGGED
-  WORKERS=$BUDDY_WORKERS_COUNT_NOT_TAGGED
+  FREE_SLOTS=$BUDDY_RUNNERS_FREE_SLOTS_NOT_TAGGED
+  RUNNERS=$BUDDY_RUNNERS_COUNT_NOT_TAGGED
 fi
 [ -n "$FREE_SLOTS" ] && [ "$FREE_SLOTS" -eq "$FREE_SLOTS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
-   echo "Env \$FREE_SLOTS ($FREE_SLOTS) is not a number. \$WORKER_TAG ($WORKER_TAG) has wrong value"
+   echo "Env \$FREE_SLOTS ($FREE_SLOTS) is not a number. \$RUNNER_TAG ($RUNNER_TAG) has wrong value"
    exit 1
 fi
-[ -n "$WORKERS" ] && [ "$WORKERS" -eq "$WORKERS" ] 2>/dev/null
+[ -n "$RUNNERS" ] && [ "$RUNNERS" -eq "$RUNNERS" ] 2>/dev/null
 if [ $? -ne 0 ]; then
-   echo "Env \$WORKERS ($WORKERS) is not a number. \$WORKER_TAG ($WORKER_TAG) has wrong value"
+   echo "Env \$RUNNERS ($RUNNERS) is not a number. \$RUNNER_TAG ($RUNNER_TAG) has wrong value"
    exit 1
 fi
-USED_SLOTS=$((WORKERS * WORKER_SLOTS))
+USED_SLOTS=$((RUNNERS * RUNNER_SLOTS))
 echo "\$MAX_SLOTS: $MAX_SLOTS"
 echo "\$FREE_SLOTS: $FREE_SLOTS"
 echo "\$USED_SLOTS: $USED_SLOTS"
-echo "\$WORKERS: $WORKERS"
-REAL_WORKER_SLOTS=$((WORKERS * WORKER_SLOTS))
+echo "\$RUNNERS: $RUNNERS"
+REAL_RUNNER_SLOTS=$((RUNNERS * RUNNER_SLOTS))
 REAL_FREE_SLOTS=$((FREE_SLOTS - MIN_FREE_SLOTS))
-if [ "$FREE_SLOTS" -lt "$MIN_FREE_SLOTS" ] && [ "$REAL_WORKER_SLOTS" -lt "$MAX_SLOTS" ]; then
-  export WORKERS=$((WORKERS + 1))
-elif [ "$REAL_FREE_SLOTS" -ge "$WORKER_SLOTS" ] && [ "$WORKERS" -gt 0 ]; then
-  export WORKERS=$((WORKERS - 1))
+if [ "$FREE_SLOTS" -lt "$MIN_FREE_SLOTS" ] && [ "$REAL_RUNNER_SLOTS" -lt "$MAX_SLOTS" ]; then
+  export RUNNERS=$((RUNNERS + 1))
+elif [ "$REAL_FREE_SLOTS" -ge "$RUNNER_SLOTS" ] && [ "$RUNNERS" -gt 0 ]; then
+  export RUNNERS=$((RUNNERS - 1))
 fi
-echo "New \$WORKERS: $WORKERS"
-export WORKERS="$WORKERS"
+echo "New \$RUNNERS: $RUNNERS"
+export RUNNERS="$RUNNERS"
