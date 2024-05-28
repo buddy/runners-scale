@@ -1,32 +1,32 @@
-name: Workers_Scale
+name: Runners_Scale
 inputs:
-  WORKER_TAG:
+  RUNNER_TAG:
     type: TEXT
-    name: Worker tag
-    info: Leave empty for untagged workers
-  WORKER_SLOTS:
+    name: Runner tag
+    info: Leave empty for untagged runners
+  RUNNER_SLOTS:
     type: TEXT
-    name: Number of slots per worker
+    name: Number of slots per runner
     default: "2"
     info: Leave empty to calculate value from license
-  MAX_WORKERS:
+  MAX_RUNNERS:
     type: TEXT
-    name: Maximum number of workers
+    name: Maximum number of runners
   MIN_FREE_SLOTS:
     type: TEXT
     name: Minimum number of free slots
     default: "1"
-docker_image_name: buddy/workers-scale
+docker_image_name: buddy/runners-scale
 docker_image_tag: latest
 working_directory: /buddy
 execute_commands:
   - . calc.sh
 output:
   variables:
-    WORKERS:
+    RUNNERS:
       example: "2"
-      info: Number of workers
-    WORKER_SLOTS:
+      info: Number of runners
+    RUNNER_SLOTS:
       example: "4"
-    WORKER_TAG:
+    RUNNER_TAG:
       example: "TAG"

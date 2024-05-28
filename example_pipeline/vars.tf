@@ -6,7 +6,7 @@ variable "AWS_AZ" {
   type = string
 }
 
-variable "WORKERS" {
+variable "RUNNERS" {
   type = number
 }
 

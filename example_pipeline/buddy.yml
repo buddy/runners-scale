@@ -1,4 +1,4 @@
-- pipeline: Scale Workers
+- pipeline: Scale Runners
   on: SCHEDULE
   delay: 5
   start_date: "2022-01-01T00:00:00Z"
@@ -7,15 +7,15 @@
   refs:
     - ":default"
   actions:
-    - action: Calculate Workers
+    - action: Calculate Runners
       type: CUSTOM
-      custom_type: Workers_Scale:latest
+      custom_type: Runners_Scale:latest
       inputs:
-        WORKER_TAG: ""
-        WORKER_SLOTS: "2"
-        MAX_WORKERS: "2"
+        RUNNER_TAG: ""
+        RUNNER_SLOTS: "2"
+        MAX_RUNNERS: "2"
         MIN_FREE_SLOTS: "1"
-    - action: Scale Workers
+    - action: Scale Runners
       type: TERRAFORM
       version: latest
       variables:
@@ -24,9 +24,9 @@
         - key: AWS_AZ
           value: "eu-central-1c"
         - key: INSTANCE_PRIVATE_KEY
-          value: "[PRIVATE KEY TO CONNECT TO WORKER]"
+          value: "[PRIVATE KEY TO CONNECT TO RUNNER]"
         - key: INSTANCE_PUBLIC_KEY
-          value: "[PUBLIC KEY TO CONNECT TO WORKER]"
+          value: "[PUBLIC KEY TO CONNECT TO RUNNER]"
         - key: INSTANCE_TYPE
           value: "t3.medium"
         - key: INSTANCE_AMI_ID
@@ -40,11 +40,11 @@
         - key: STANDALONE_HOST
           value: "172.31.15.212"
         - key: STANDALONE_TOKEN
-          value: "[ON-PREMISES WORKER TOKEN]"
+          value: "[ON-PREMISES RUNNER TOKEN]"
         - key: BACKEND_BUCKET
           value: "[BUCKET ON S3 TO SAVE TERRAFORM STATE]"
         - key: BACKEND_KEY
-          value: "workers.tfstate"
+          value: "runners.tfstate"
       execute_commands:
         - chmod +x scale.sh
         - ./scale.sh
