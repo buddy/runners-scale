@@ -27,7 +27,7 @@ The input data is passed to `calc.sh` which generates three variables:
 
 ### Preview in Buddy GUI
 
-![buddy-runner-calculator](https://user-images.githubusercontent.com/8556342/217527631-9c496bfa-957f-469f-8f0c-d8c81d5d7cc3.png)
+![buddy-runner-calculator](/runners-scale-gui-preview.png)
 
 ### Example pipeline
 
